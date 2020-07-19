@@ -37,8 +37,10 @@ module.exports = {
 
         // error
         "@typescript-eslint/explicit-function-return-type": "error",
+        "no-extra-semi": "error",
         "react-hooks/exhaustive-deps": "error",
         "react-hooks/rules-of-hooks": "error",
+        "semi": ["error", "always"],
         "quotes": ["error", "double"],
     },
     overrides: [
