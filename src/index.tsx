@@ -1,11 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { defineCustomElements } from "@ionic/pwa-elements/loader";
 
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);
