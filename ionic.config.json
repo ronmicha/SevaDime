@@ -1,0 +1,7 @@
+{
+  "name": "sevadime",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
