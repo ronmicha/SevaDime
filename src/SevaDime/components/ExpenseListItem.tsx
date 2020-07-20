@@ -3,11 +3,6 @@ import Collapse from "@kunukn/react-collapse";
 import React, { FC, memo, useState } from "react";
 import { Expense } from "../types";
 import { getReadableDate } from "../utils/general";
-import styled from "@emotion/styled";
-
-const StyledCollapseIonItem = styled(IonItem)`
-   flex-direction: column; !important
-`;
 
 type ExpenseItemProps = Omit<Expense, "id" | "categoryId" | "paymentMethodId"> & {
    categoryName?: string;
