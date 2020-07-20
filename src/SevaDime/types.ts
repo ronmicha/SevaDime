@@ -1,25 +1,24 @@
-type ID = { id: string };
+export type ID = { id: string };
 
-type WithId<T> = T & ID;
+export type WithId<T> = T & ID;
 
-type EntityId<T extends ID> = T["id"];
+export type EntityId<T extends ID> = T["id"];
 
 type Transaction = WithId<{
     name: string;
     description?: string;
     amount: number;
-    isRecurring: boolean;
     date: number;
-    monthId: EntityId<Month>;
+    isRecurring: boolean;
 }>;
 
 type ExpenseUserData = WithId<{
     name: string;
     description?: string;
-    budget?: number;
+    periodicBudget?: number;
 }>;
 
-export type Month = WithId<{
+export type Period = WithId<{
     startDate: Date;
     endDate: Date;
 }>;

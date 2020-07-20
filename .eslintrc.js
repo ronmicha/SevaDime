@@ -28,19 +28,25 @@ module.exports = {
         "@typescript-eslint"
     ],
     rules: {
-        "max-len": ["error", { "code": 120, "tabWidth": 4 }],
         // off
         "jest/prefer-expect-assertions": "off",
-        "object-curly-spacing": "off",
+        "linebreak-style": "off",
+        "no-unused-vars": "off",
+        "react/display-name": "off",
         "require-jsdoc": "off",
-        // warning
-
         // error
         "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "arrow-spacing": "error",
+        "indent": ["error", 3],
+        "max-len": ["error", { "code": 140, "tabWidth": 4 }],
         "no-extra-semi": "error",
+        "object-curly-spacing": ["error", "always"],
+        "react/jsx-space-before-closing": ["error", "always"],
         "react-hooks/exhaustive-deps": "error",
         "react-hooks/rules-of-hooks": "error",
         "semi": ["error", "always"],
+        "space-infix-ops": "error",
         "quotes": ["error", "double"],
     },
     overrides: [
