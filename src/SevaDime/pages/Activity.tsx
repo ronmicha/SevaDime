@@ -1,7 +1,9 @@
-import { IonContent, IonLabel, IonList, IonPage } from "@ionic/react";
-import React, { FC } from "react";
+import { IonContent, IonLabel, IonList, IonPage, IonItemDivider } from "@ionic/react";
+import React, { FC, useState, useEffect } from "react";
 import { ExpenseListItem } from "../components";
+import { mockCategories, mockPaymentMethods } from "../mockData";
 import { Expense, Income, Transaction } from "../types";
+import { findEntityById } from "../utils/general";
 
 type ActivityProps = {
    expenses: Expense[];
@@ -13,28 +15,44 @@ const sortByDate = <T extends Transaction>(transactions: Array<T>): Array<T> => 
 };
 
 const Activity: FC<ActivityProps> = (props: ActivityProps) => {
-   const { expenses, incomes } = props;
+   const [expenses, setExpenses] = useState<Expense[]>([]);
+   const [incomes, setIncomes] = useState<Income[]>([]);
 
-   const sortedExpensesByDate = sortByDate(expenses);
-   const sortedIncomesByDate = sortByDate(incomes);
+   useEffect(() => {
+      const sortedExpensesByDate = sortByDate(props.expenses);
+      const sortedIncomesByDate = sortByDate(props.incomes);
+
+      setExpenses(sortedExpensesByDate);
+      setIncomes(sortedIncomesByDate);
+   }, [props.expenses, props.incomes]);
+
 
    return (
       <IonPage>
          <IonContent>
-            <IonLabel>Expenses</IonLabel>
             <IonList>
-               {sortedExpensesByDate.map(({ id, name, description, amount, date, categoryId, paymentMethodId, isRecurring }) => (
-                  <ExpenseListItem
-                     key={id}
-                     name={name}
-                     description={description}
-                     amount={amount}
-                     date={date}
-                     categoryId={categoryId}
-                     paymentMethodId={paymentMethodId}
-                     isRecurring={isRecurring}
-                  />
-               ))}
+               <IonItemDivider color={"primary"}>
+                  <IonLabel>
+                     Basic Item Divider
+                  </IonLabel>
+               </IonItemDivider>
+               {expenses.map(({ id, name, description, amount, date, categoryId, paymentMethodId, isRecurring }) => {
+                  const categoryName = findEntityById(mockCategories, categoryId)?.name;
+                  const paymentMethodName = findEntityById(mockPaymentMethods, paymentMethodId)?.name;
+
+                  return (
+                     <ExpenseListItem
+                        key={id}
+                        name={name}
+                        description={description}
+                        amount={amount}
+                        date={date}
+                        categoryName={categoryName}
+                        paymentMethodName={paymentMethodName}
+                        isRecurring={isRecurring}
+                     />
+                  );
+               })}
             </IonList>
          </IonContent>
       </IonPage>

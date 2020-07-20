@@ -13,21 +13,20 @@ import "@ionic/react/css/structure.css";
 import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/typography.css";
-import { calculator, ellipse, square } from "ionicons/icons";
+import { calculator, cashOutline, trendingUp } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import { mockExpenses, mockIncomes } from "./mockData";
 import Activity from "./pages/Activity";
-import Tab2 from "./pages/Tab2";
-import Tab3 from "./pages/Tab3";
+import Personal from "./pages/Tab2";
+import Insights from "./pages/Tab3";
 /* Theme variables */
 import "./theme/variables.css";
 
-
 enum PagePath {
   Activity = "/activity",
-  Tab2 = "/tab2",
-  Tab3 = "/tab3"
+  Personal = "/personal",
+  Insights = "/insights"
 }
 
 const App: React.FC = () => (
@@ -35,27 +34,27 @@ const App: React.FC = () => (
       <IonReactRouter>
          <IonTabs>
             <IonRouterOutlet>
+               <Route path={PagePath.Personal} component={Personal} exact={true} />
                <Route
                   path={PagePath.Activity}
                   component={(): JSX.Element => <Activity expenses={mockExpenses} incomes={mockIncomes} />}
                   exact={true}
                />
-               <Route path={PagePath.Tab2} component={Tab2} exact={true} />
-               <Route path={PagePath.Tab3} component={Tab3} />
+               <Route path={PagePath.Insights} component={Insights} />
                <Route path="/" render={(): JSX.Element => <Redirect to={PagePath.Activity} />} exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
-               <IonTabButton tab="tab1" href={PagePath.Activity}>
+               <IonTabButton tab="personal" href={PagePath.Personal}>
+                  <IonIcon icon={cashOutline} />
+                  <IonLabel>Personal</IonLabel>
+               </IonTabButton>
+               <IonTabButton tab="activity" href={PagePath.Activity}>
                   <IonIcon icon={calculator} />
                   <IonLabel>Activity</IonLabel>
                </IonTabButton>
-               <IonTabButton tab="tab2" href={PagePath.Tab2}>
-                  <IonIcon icon={ellipse} />
-                  <IonLabel>Tab 2</IonLabel>
-               </IonTabButton>
-               <IonTabButton tab="tab3" href={PagePath.Tab3}>
-                  <IonIcon icon={square} />
-                  <IonLabel>Tab 3</IonLabel>
+               <IonTabButton tab="insights" href={PagePath.Insights}>
+                  <IonIcon icon={trendingUp} />
+                  <IonLabel>Insights</IonLabel>
                </IonTabButton>
             </IonTabBar>
          </IonTabs>

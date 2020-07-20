@@ -1,26 +1,50 @@
 import { IonItem, IonLabel } from "@ionic/react";
-import React, { FC, memo, useMemo } from "react";
-import { mockCategories, mockPaymentMethods } from "../mockData";
+import Collapse from "@kunukn/react-collapse";
+import React, { FC, memo, useState } from "react";
 import { Expense } from "../types";
-import { findEntityById, getReadableDate } from "../utils/general";
+import { getReadableDate } from "../utils/general";
+import styled from "@emotion/styled";
 
-type ExpenseItemProps = Omit<Expense, "id">;
+const StyledCollapseIonItem = styled(IonItem)`
+   flex-direction: column; !important
+`;
+
+type ExpenseItemProps = Omit<Expense, "id" | "categoryId" | "paymentMethodId"> & {
+   categoryName?: string;
+   paymentMethodName?: string;
+};
 
 const ExpenseListItem: FC<ExpenseItemProps> = (props: ExpenseItemProps): JSX.Element => {
-   const { name, description, amount, date, categoryId, paymentMethodId } = props;
+   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-   const categoryName = useMemo(() => findEntityById(mockCategories, categoryId)?.name, [categoryId]);
-   const paymentMethodName = useMemo(() => findEntityById(mockPaymentMethods, paymentMethodId)?.name, [paymentMethodId]);
+   const { name, description, amount, date, categoryName, paymentMethodName } = props;
+
+   const readableDate = getReadableDate(new Date(date));
+
+   const toggleCollapse = (): void => {
+      setIsOpen((isOpen) => !isOpen);
+   };
 
    return (
-      <IonItem>
-         <IonLabel>{name}</IonLabel>
-         <IonLabel>{description}</IonLabel>
-         <IonLabel>{getReadableDate(new Date(date))}</IonLabel>
-         <IonLabel>{categoryName}</IonLabel>
-         <IonLabel>{paymentMethodName}</IonLabel>
-         <IonLabel>{amount}</IonLabel>
-      </IonItem>
+      <>
+         <IonItem button={true} onClick={toggleCollapse}>
+            <IonLabel>{name}</IonLabel>
+            <IonLabel>{readableDate}</IonLabel>
+            <IonLabel>{categoryName}</IonLabel>
+            <IonLabel>{paymentMethodName}</IonLabel>
+            <IonLabel>{amount}</IonLabel>
+         </IonItem>
+         <Collapse isOpen={isOpen}>
+            <IonItem>
+               <IonLabel>{name}</IonLabel>
+               <IonLabel>{description}</IonLabel>
+               <IonLabel>{readableDate}</IonLabel>
+               <IonLabel>{categoryName}</IonLabel>
+               <IonLabel>{paymentMethodName}</IonLabel>
+               <IonLabel>{amount}</IonLabel>
+            </IonItem>
+         </Collapse>
+      </>
    );
 };
 
