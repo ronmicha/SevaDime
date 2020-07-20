@@ -32,11 +32,12 @@ module.exports = {
         "jest/prefer-expect-assertions": "off",
         "linebreak-style": "off",
         "no-unused-vars": "off",
-        "react/display-name": "off",
         "require-jsdoc": "off",
         // error
         "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/member-delimiter-style": "error",
         "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/type-annotation-spacing": "error",
         "arrow-spacing": "error",
         "indent": ["error", 3],
         "max-len": ["error", { "code": 140, "tabWidth": 4 }],

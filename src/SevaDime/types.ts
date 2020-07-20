@@ -4,7 +4,7 @@ export type WithId<T> = T & ID;
 
 export type EntityId<T extends ID> = T["id"];
 
-type Transaction = WithId<{
+export type Transaction = WithId<{
     name: string;
     description?: string;
     amount: number;

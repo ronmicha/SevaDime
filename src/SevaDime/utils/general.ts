@@ -3,7 +3,7 @@ import { EntityId, ID, WithId } from "../types";
 
 export const generateEntityId = (): ID => ({ id: uuid() });
 
-export const findEntityById = <T>(collection: Array<WithId<T>>, id: EntityId<WithId<T>>): T|undefined => {
+export const findEntityById = <T>(collection: Array<WithId<T>>, id: EntityId<WithId<T>>): T | undefined => {
    return collection.find(({ id: entityId }) => entityId === id);
 };
 

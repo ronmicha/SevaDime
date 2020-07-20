@@ -1,21 +1,27 @@
-import { IonContent, IonList, IonPage } from "@ionic/react";
+import { IonContent, IonLabel, IonList, IonPage } from "@ionic/react";
 import React, { FC } from "react";
 import { ExpenseListItem } from "../components";
-import { Expense, Income } from "../types";
+import { Expense, Income, Transaction } from "../types";
 
 type ActivityProps = {
    expenses: Expense[];
    incomes: Income[];
 };
 
+const sortByDate = <T extends Transaction>(transactions: Array<T>): Array<T> => {
+   return [...transactions].sort((t1, t2) => t1.date - t2.date);
+};
+
 const Activity: FC<ActivityProps> = (props: ActivityProps) => {
    const { expenses, incomes } = props;
 
-   const sortedExpensesByDate = [...expenses].sort((e1, e2) => e2.date - e1.date);
+   const sortedExpensesByDate = sortByDate(expenses);
+   const sortedIncomesByDate = sortByDate(incomes);
 
    return (
       <IonPage>
          <IonContent>
+            <IonLabel>Expenses</IonLabel>
             <IonList>
                {sortedExpensesByDate.map(({ id, name, description, amount, date, categoryId, paymentMethodId, isRecurring }) => (
                   <ExpenseListItem
