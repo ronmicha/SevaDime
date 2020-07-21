@@ -3,8 +3,8 @@ import { EntityId, ID, WithId } from "../types";
 
 export const generateEntityId = (): ID => ({ id: uuid() });
 
-export const findEntityById = <T>(collection: Array<WithId<T>>, id: EntityId<WithId<T>>): T | undefined => {
-   return collection.find(({ id: entityId }) => entityId === id);
+export const findEntityById = <T>(entities: Array<WithId<T>>, id: EntityId<WithId<T>>): T | undefined => {
+   return entities.find(({ id: entityId }) => entityId === id);
 };
 
 export const formatDate = (date: Date, delimiter = "-"): string => {
@@ -15,7 +15,7 @@ export const formatDate = (date: Date, delimiter = "-"): string => {
    return [day, month, year].join(delimiter);
 };
 
-export const sortItemsBy = <T>(transactions: Array<T>, propName: keyof T, direction: "asc" | "desc" = "asc"): Array<T> => {
+export const sortItemsBy = <T>(items: Array<T>, propName: keyof T, direction: "asc" | "desc" = "asc"): Array<T> => {
    const sorter: number = direction === "asc" ? 1 : -1;
-   return [...transactions].sort((t1, t2) => t1[propName] > t2[propName] ? sorter : -sorter);
+   return [...items].sort((t1, t2) => t1[propName] > t2[propName] ? sorter : -sorter);
 };
