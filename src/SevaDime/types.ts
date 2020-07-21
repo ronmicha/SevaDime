@@ -10,6 +10,8 @@ export type Transaction = WithId<{
     amount: number;
     date: number;
     isRecurring: boolean;
+    categoryId?: EntityId<ExpenseCategory>;
+    paymentMethodId?: EntityId<PaymentMethod>;
 }>;
 
 type ExpenseUserData = WithId<{
@@ -27,9 +29,6 @@ export type ExpenseCategory = ExpenseUserData;
 
 export type PaymentMethod = ExpenseUserData;
 
-export type Income = Transaction;
+export type Income = Omit<Transaction, "categoryId" | "paymentMethodId">;
 
-export type Expense = Transaction & {
-    categoryId: EntityId<ExpenseCategory>;
-    paymentMethodId: EntityId<PaymentMethod>;
-};
+export type Expense = Transaction & Required<Pick<Transaction, "categoryId" | "paymentMethodId">>;
