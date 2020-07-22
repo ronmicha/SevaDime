@@ -8,14 +8,15 @@ type FabButtonProps = {
     color?: ThemeColor;
     icon?: string;
     text?: string;
+    onClick: () => void;
 };
 
 const FabButton: FC<FabButtonProps> = (props: FabButtonProps): JSX.Element => {
-   const { vertical, horizontal, icon, text, color = "primary" } = props;
+   const { vertical = "bottom", horizontal = "end", icon, text, onClick, color = "primary" } = props;
 
    return (
       <IonFab vertical={vertical} horizontal={horizontal} slot="fixed">
-         <IonFabButton color={color}>
+         <IonFabButton color={color} onClick={onClick}>
             {icon ? (<IonIcon icon={icon} />) : text}
          </IonFabButton>
       </IonFab>

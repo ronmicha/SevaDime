@@ -32,7 +32,6 @@ export type MonthlyUserItem = WithId<{
     userItemId: EntityId<UserItem>;
     monthId: EntityId<Month>;
     budget?: number;
-    usedBudget: number;
 }>;
 
 export type ExpenseCategory = UserItem;
