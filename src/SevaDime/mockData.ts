@@ -1,5 +1,5 @@
 import { ExpenseCategory, PaymentMethod, Expense, Income } from "./types";
-import { generateEntityId } from "./utils/general";
+import { generateEntityId } from "./utils";
 
 export const mockCategories: ExpenseCategory[] = [
    {

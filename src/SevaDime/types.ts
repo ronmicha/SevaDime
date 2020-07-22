@@ -4,6 +4,8 @@ export type WithId<T> = T & ID;
 
 export type EntityId<T extends ID> = T["id"];
 
+export type ThemeColor = "primary" | "secondary" | "tertiary" | "success" | "warning" | "danger" | "light" | "medium" | "dark";
+
 export type Transaction = WithId<{
     name: string;
     description?: string;
@@ -14,20 +16,28 @@ export type Transaction = WithId<{
     paymentMethodId?: EntityId<PaymentMethod>;
 }>;
 
-type ExpenseUserData = WithId<{
+// general user item details, unrelated to a specific month
+export type UserItem = WithId<{
     name: string;
     description?: string;
-    periodicBudget?: number;
 }>;
 
-export type Period = WithId<{
+export type Month = WithId<{
     startDate: Date;
     endDate: Date;
 }>;
 
-export type ExpenseCategory = ExpenseUserData;
+// instance of userItem in a specific month
+export type MonthlyUserItem = WithId<{
+    userItemId: EntityId<UserItem>;
+    monthId: EntityId<Month>;
+    budget?: number;
+    usedBudget: number;
+}>;
 
-export type PaymentMethod = ExpenseUserData;
+export type ExpenseCategory = UserItem;
+
+export type PaymentMethod = UserItem;
 
 export type Income = Omit<Transaction, "categoryId" | "paymentMethodId">;
 
