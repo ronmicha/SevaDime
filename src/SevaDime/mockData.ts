@@ -34,7 +34,7 @@ export const mockPaymentMethods: PaymentMethod[] = [
    },
 ];
 
-export const mockMonth: Month = {
+export const mockMonths: Month[] = [{
    ...generateEntityId(),
    startDate: new Date(2020, mockActiveMonth, 1),
    endDate: new Date(2020, mockActiveMonth, getLastDay(2020, mockActiveMonth)),
@@ -112,4 +112,4 @@ export const mockMonth: Month = {
          date: Date.now(),
       },
    ],
-};
+}];
