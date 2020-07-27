@@ -16,28 +16,28 @@ export type Transaction = WithId<{
     paymentMethodId?: EntityId<PaymentMethod>;
 }>;
 
-// general user item details, unrelated to a specific month
-export type UserItem = WithId<{
+export type ExpenseCategory = WithId<{
+    name: string;
+    description?: string;
+    budget?: number;
+}>;
+
+export type PaymentMethod = WithId<{
     name: string;
     description?: string;
 }>;
 
-export type Month = WithId<{
-    startDate: Date;
-    endDate: Date;
-}>;
-
-// instance of userItem in a specific month
-export type MonthlyUserItem = WithId<{
-    userItemId: EntityId<UserItem>;
-    monthId: EntityId<Month>;
-    budget?: number;
-}>;
-
-export type ExpenseCategory = UserItem;
-
-export type PaymentMethod = UserItem;
+export type MonthlyPaymentMethodBudget = Record<EntityId<PaymentMethod>, number>;
 
 export type Income = Omit<Transaction, "categoryId" | "paymentMethodId">;
 
 export type Expense = Transaction & Required<Pick<Transaction, "categoryId" | "paymentMethodId">>;
+
+export type Month = WithId<{
+    startDate: Date;
+    endDate: Date;
+    expenses: Expense[];
+    incomes: Income[];
+    categories: ExpenseCategory[];
+    paymentMethodBudget: MonthlyPaymentMethodBudget;
+}>;

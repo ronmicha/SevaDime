@@ -16,8 +16,8 @@ import "@ionic/react/css/typography.css";
 import { calculator, cashOutline, trendingUp } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { mockExpenses, mockIncomes } from "./mockData";
-import Activity from "./pages/Activity";
+import { mockMonth } from "./mockData";
+import Activity from "./pages/Activity/Activity";
 import Personal from "./pages/Tab2";
 import Insights from "./pages/Tab3";
 /* Theme variables */
@@ -37,7 +37,7 @@ const App: React.FC = () => (
                <Route path={PagePath.Personal} component={Personal} exact={true} />
                <Route
                   path={PagePath.Activity}
-                  component={(): JSX.Element => <Activity expenses={mockExpenses} incomes={mockIncomes} />}
+                  component={(): JSX.Element => <Activity months={[mockMonth]} />}
                   exact={true}
                />
                <Route path={PagePath.Insights} component={Insights} />

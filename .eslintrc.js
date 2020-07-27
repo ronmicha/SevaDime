@@ -42,6 +42,7 @@ module.exports = {
         "indent": ["error", 3],
         "max-len": ["error", { "code": 140, "tabWidth": 4 }],
         "no-extra-semi": "error",
+        "no-multiple-empty-lines": [2, { "max": 1 }],
         "object-curly-spacing": ["error", "always"],
         "react/jsx-space-before-closing": ["error", "always"],
         "react-hooks/exhaustive-deps": "error",

@@ -1,12 +1,11 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React, { FC, useState } from "react";
-import { PieChart, TransactionList, FabButton } from "../components";
-import { Expense, Income } from "../types";
-import { getCategoryName, getPaymentMethodName, sortItemsBy } from "../utils";
+import { FabButton, PieChart, TransactionList } from "../../components";
+import { Expense, Income, Month } from "../../types";
+import { getCategoryName, getPaymentMethodName, sortItemsBy } from "../../utils";
 
 type ActivityProps = {
-   expenses: Expense[];
-   incomes: Income[];
+   months: Month[];
 };
 
 enum ChartDataType {
